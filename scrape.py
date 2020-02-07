@@ -20,12 +20,13 @@ def Mars_scrape(db):
     
 
     #### Initiate Chrome
-    driver = webdriver.Chrome()
-    driver.set_page_load_timeout(7)
+    
     ############################################
     ### Define Article scraper module
     ############################################
     def Articles_scraper(path):
+        driver = webdriver.Chrome()
+        driver.set_page_load_timeout(10)
         driver.get(path)
         print("Artticle scraping started at path :", path)
         while True:
@@ -180,7 +181,7 @@ def Mars_scrape(db):
         collection_img = db.Mars_Image
     else:
         collection_img = db.create_collection("Mars_Image")
-        collection_img.update({'_id':'1'},{'$set':{Image_Scraper("https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars")}})
+        collection_img.insert_many(Image_Scraper("https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"))
 
     if collection_img.estimated_document_count() == 0:
         collection_img.insert_many(Image_Scraper("https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"))
