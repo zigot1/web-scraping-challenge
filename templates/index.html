@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Templates 101</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/TZ_style.css') }}">
+</head>
+
+<body>
+  <div class="container text-center">
+    <div class = "row">
+    <h1 class="jumbotron">Mars Scraping</h1>
+    </div>
+  </div>
+  <div class="container ">
+    <div class="row text-left">
+      <div class = "col-md-6">
+        <h1>Mars Articles Since 01/01/2000</h1>
+        <table class="table-striped">
+        <ul style="list-style: none;">
+          
+          {% for Article in Articles %}
+          <tr>
+            <td>
+              <h4>{{ Article.date}}</h4>
+              <h3>{{ Article.title}}</h3>
+                  {{ Article.article }}
+            </td>
+          </tr>
+          {% endfor %}
+        </ul>
+        
+        </table>
+      </div>
+      <div class = "col-md-6">
+        <h1>Today's Mars Weather</h1>
+        {% for w in Weather %}
+          <h4>Mars Day : {{ w.date}} </h4>
+          <h4>Mars Report : {{ w.weather}}</h4>
+        {% endfor %}
+        <h1>IMAGE OF THE DAY</h1>
+        {% for img in DayImage %}
+        <h1><img src = "{{ img.img }}" width="500"/> </h1>
+        {% endfor %}
+        <h1>MARS DATA</h1>
+        {% for d in Data %}
+        <h4>{{d.fact}} {{d.data}}</h4>
+        {% endfor %}
+        <h1>MARS HEMISPHERES</h1>
+        {% for h in Hemi %}
+        <h4>{{h.name}} </h4>
+        <h4><a href = "{{ h.img_url }}" >Download Large Image...</a></h4>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
