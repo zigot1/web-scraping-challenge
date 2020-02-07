@@ -29,7 +29,6 @@ def Mars_scrape(db):
         driver.get(path)
         print("Artticle scraping started at path :", path)
         while True:
-            #timeout = 10
             try: 
                 driver.find_element_by_xpath("""//*[contains(@class,'list_footer more_button')]""").click()
             except NoSuchElementException:
